@@ -13,7 +13,9 @@ export function TreePage() {
   const roots = [...groups, ...(rtvc ? [rtvc] : [])]
   const requested = params.get('raiz')
   const requestedEntity = requested ? getEntity(requested) : undefined
-  const selected = roots.find((entity) => entity.id === requested) ?? requestedEntity ?? roots[0]
+  const extraRoot = requestedEntity && !roots.some((entity) => entity.id === requestedEntity.id) ? requestedEntity : null
+  const pickerRoots = extraRoot ? [extraRoot, ...roots] : roots
+  const selected = pickerRoots.find((entity) => entity.id === requested) ?? requestedEntity ?? roots[0]
   const focus = params.get('foco') ?? selected.id
   const tree = getTree(selected.id)
   const focusEntity = getEntity(focus)
@@ -33,7 +35,7 @@ export function TreePage() {
 
       <section className="shell section section--tight">
         <nav className="root-picker" aria-label="Elegir raíz del árbol">
-          {roots.map((root) => (
+          {pickerRoots.map((root) => (
             <Link
               key={root.id}
               className={`root-chip ${root.id === selected.id ? 'is-active' : ''}`}
