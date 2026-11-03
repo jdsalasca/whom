@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="WHOM">
+  <rect width="64" height="64" fill="#10120c"/>
+  <rect x="7" y="7" width="50" height="50" fill="#a93427" stroke="#e9dec5" stroke-width="2"/>
+  <text x="32" y="45" text-anchor="middle" font-family="Oswald, 'Arial Narrow', Impact, sans-serif" font-size="40" font-weight="700" fill="#e9dec5">W</text>
+</svg>
