@@ -208,10 +208,6 @@ export function getTree(id: string): TreeBranch | undefined {
   return root ? buildBranch(root.id, new Set()) : undefined
 }
 
-export function getTreeForBranch(id: string): TreeBranch | undefined {
-  return buildBranch(id, new Set())
-}
-
 export function countTreeNodes(branch: TreeBranch): number {
   return 1 + branch.children.reduce((total, child) => total + countTreeNodes(child), 0)
 }

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import type { TreeBranch } from '../data/queries'
+import { countTreeNodes, type TreeBranch } from '../data/queries'
 import { relationLabel, typeLabel } from '../format'
 
 function findPath(branch: TreeBranch, id: string, path: string[] = []): string[] | null {
@@ -18,10 +18,6 @@ function collectExpandable(branch: TreeBranch): string[] {
     ...(branch.children.length ? [branch.entity.id] : []),
     ...branch.children.flatMap(collectExpandable),
   ]
-}
-
-function countNodes(branch: TreeBranch): number {
-  return 1 + branch.children.reduce((total, child) => total + countNodes(child), 0)
 }
 
 function TreeNodes({
@@ -98,7 +94,7 @@ export function OwnershipTree({ tree, focusId }: { tree: TreeBranch; focusId?: s
     setExpanded(new Set(findPath(tree, focusId ?? tree.entity.id) ?? [tree.entity.id]))
   }, [tree.entity.id, focusId])
 
-  const total = countNodes(tree)
+  const total = countTreeNodes(tree)
   const expandable = collectExpandable(tree)
 
   function toggle(id: string) {
